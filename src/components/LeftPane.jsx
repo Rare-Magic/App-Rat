@@ -36,7 +36,7 @@ function UploadZone({ file, onFile }) {
 
   return (
     <section className="left-section">
-      <h3 className="left-section-title">Upload data</h3>
+      <h3 className="left-section-title">Upload CMDB Data</h3>
       <p className="left-section-hint">Excel or CSV (fixed column names). Drag & drop or choose file.</p>
       <div
         className={`upload-zone ${drag ? 'upload-zone-drag' : ''} ${file ? 'upload-zone-has-file' : ''}`}
@@ -69,7 +69,7 @@ function UploadZone({ file, onFile }) {
 function IndustrySelect({ value, options, onChange }) {
   return (
     <section className="left-section">
-      <h3 className="left-section-title">Industry</h3>
+      <h3 className="left-section-title">Select Bain Industry</h3>
       <select
         className="industry-select"
         value={value}
@@ -104,10 +104,12 @@ function OutputSection({ onDownload }) {
       <h3 className="left-section-title">Bot output</h3>
       <button type="button" className="output-block" onClick={onDownload} aria-label="Download PPT">
         <span className="output-icon" aria-hidden>
-          <img src="/logos/ppt.jpg" alt="" />
+          <img src="/logos/ppt.png" alt="" />
         </span>
-        <span className="output-text">Download PPT</span>
-        <span className="output-hint">Click to download</span>
+        <div className="output-block-text">
+          <span className="output-text">Download PPT</span>
+          <span className="output-hint">Click to download</span>
+        </div>
       </button>
     </section>
   )
@@ -142,7 +144,7 @@ export default function LeftPane({
           disabled={!canRunTaxonomy}
           onClick={onRunTaxonomy}
         >
-          Map taxonomy to Excel
+          Map CMDB Data
         </button>
         <ProgressBar progress={taxonomyProgress} label={taxonomyProgress === 100 ? 'Done' : `${taxonomyProgress}%`} />
       </section>
@@ -154,7 +156,7 @@ export default function LeftPane({
           disabled={!canRunGartner}
           onClick={onRunGartner}
         >
-          Gartner mapping
+          Gartner Leaders Mapping
         </button>
         <ProgressBar progress={gartnerProgress} label={gartnerProgress === 100 ? 'Done' : `${gartnerProgress}%`} />
       </section>

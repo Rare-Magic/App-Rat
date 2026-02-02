@@ -1,27 +1,13 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import Header from './components/Header'
 import LeftPane from './components/LeftPane'
 import RightPane from './components/RightPane'
 import './App.css'
 
-const INDUSTRIES = ['Banking', 'Healthcare', 'Retail', 'Manufacturing', 'Technology']
+const INDUSTRIES = ['Banking & FS', 'Healthcare', 'Retail', 'Manufacturing']
 
 export default function App() {
-  const [theme, setTheme] = useState(() => {
-    try {
-      return localStorage.getItem('app-rat-theme') || 'teal'
-    } catch {
-      return 'teal'
-    }
-  })
   const [file, setFile] = useState(null)
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    try {
-      localStorage.setItem('app-rat-theme', theme)
-    } catch {}
-  }, [theme])
   const [industry, setIndustry] = useState('')
   const [taxonomyProgress, setTaxonomyProgress] = useState(0)
   const [gartnerProgress, setGartnerProgress] = useState(0)
@@ -105,7 +91,7 @@ export default function App() {
 
   return (
     <>
-      <Header theme={theme} onThemeChange={setTheme} />
+      <Header />
       <main className="app-main">
         <LeftPane
           file={file}

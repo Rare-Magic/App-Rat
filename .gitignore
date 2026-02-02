@@ -31,3 +31,12 @@ Thumbs.db
 # Optional
 *.local
 .cache
+
+# Test / coverage
+coverage
+.nyc_output
+
+# Misc
+*.tgz
+.npm
+.eslintcache

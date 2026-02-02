@@ -19,20 +19,22 @@ function StatusFeed({ log }) {
   }
 
   return (
-    <section className="right-section">
+    <section className="right-section right-section-status">
       <h3 className="right-section-title">Bot process status</h3>
-      <ul className="status-list" aria-label="Status log">
-        {log.length === 0 ? (
-          <li className="status-item status-item-empty">No activity yet.</li>
-        ) : (
-          log.map((item) => (
-            <li key={item.id} className={`status-item status-item-${item.type}`}>
-              {iconFor(item.type)}
-              <span className="status-message">{item.message}</span>
-            </li>
-          ))
-        )}
-      </ul>
+      <div className="status-list-scroll">
+        <ul className="status-list" aria-label="Status log">
+          {log.length === 0 ? (
+            <li className="status-item status-item-empty">No activity yet.</li>
+          ) : (
+            log.map((item) => (
+              <li key={item.id} className={`status-item status-item-${item.type}`}>
+                {iconFor(item.type)}
+                <span className="status-message">{item.message}</span>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
     </section>
   )
 }
