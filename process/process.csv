@@ -1,0 +1,41 @@
+SysID,Applications Name,Install Type,Tier,Application Type,Description,Health,Spend,L1,L2,Gartner Mapping,Market Leaders
+SYSID-06935,Acadiasoft Initial Margin Exposure Manager,Third Party Hosted,T3,COTS,xxx,14,1200,Client Services & Support,Investment Services,Retail Banking,Thought Machine
+SYSID-08163,AcadiaSoft Static & Dynamic Back Testing,Third Party Hosted,T3,COTS,xxx,12,1300,Client Services & Support,Investment Services,Retail Banking,TCS BaNCS
+SYSID-06720,accessEscrow - AWS,CFG Managed Public Cloud,T2,COTS,xxx,16,1300,Banking Services,Corporate Banking,Retail Banking,Mambu
+SYSID-00274,Accurint,Third Party Hosted,T3,COTS,xxx,12,1300,Legal Management,Legal Research or Case Management,Retail Banking,Intellect Design Arena
+SYSID-00602,ACI Speedpay,Third Party Hosted,T3,COTS,xxx,7,1300,Finance (Internal),Payment Processing,Retail Banking,Infosys Finacle
+SYSID-06879,ACloudGuru,Third Party Hosted,T3,COTS,xxx,8,1300,HR,"Performance, Training, Workforce & Change Management",Retail Banking,Finastra Essence
+SYSID-07418,Acuity Portal,Third Party Hosted,T3,COTS,xxx,7,1300,Business Operations,Operations Management,Retail Banking,Oracle FLEXCUBE
+SYSID-01809,Adobe Analytics,Third Party Hosted,T3,COTS,xxx,12,1234,Sales & Marketing/Commercial,Customer Engagement & Digital Experience,Retail Banking,Sumsub
+SYSID-06591,Agile Information Model - AWS,CFG Managed Public Cloud,,Homegrown,xxx,8,1300,Business Operations,Internal Communication & Employee Engagement,Retail Banking,Socure
+SYSID-02805,Akamai Edge DNS Solutions,Third Party Hosted,T2,COTS,xxx,7,555,IT,Cloud Services & SaaS Management,Retail Banking,Entrust
+SYSID-08157,Akamai rDNS,Third Party Hosted,T2,COTS,xxx,7,555,Digital Security,Identity & Network Security,Retail Banking,Jumio
+SYSID-05915,Algosec Firewall Analyzer and Fire Flow,On Premise,T3,COTS,xxx,7,1300,Digital Security,Identity & Network Security,Retail Banking,Incode Technologies
+SYSID-06003,Alirt Web Portal,Third Party Hosted,T3,COTS,xxx,12,675,Client Services & Support,Insurance,Retail Banking,Delinea
+SYSID-07187,Alogent Payments Gateway - AWS,CFG Managed Public Cloud,T1,COTS,xxx,9,4,Finance (Internal),Payment Processing,Retail Banking,BeyondTrust
+SYSID-06543,Alteryx - AWS,CFG Managed Public Cloud,T3,COTS,xxx,8,2,IT,Business Intelligence,Retail Banking,CyberArk
+SYSID-09034,Amazon Security Lake - AWS,CFG Managed Public Cloud,T3,COTS,xxx,8,1300,Digital Security,Threat Intelligence & Incident Response,Retail Banking,ARCON
+SYSID-06999,AML KYC Profile System - AWS,CFG Managed Public Cloud,T3,COTS,xxx,14,898,Legal Management,Monitoring & Surveillance,Retail Banking,ManageEngine
+SYSID-08357,Android Build Agent,On Premise,T3,Homegrown,xxx,14,1300,IT,Software Development & Management,Retail Banking,Microsoft
+SYSID-05814,Annuity Net,Third Party Hosted,T3,COTS,xxx,12,1300,Client Services & Support,"Financial Advisory, Analysis & Planning",Retail Banking,Okta
+SYSID-06004,Annuity Rate Watch,Third Party Hosted,T3,COTS,xxx,12,1300,Client Services & Support,"Financial Advisory, Analysis & Planning",Retail Banking,Ping Identity
+SYSID-08158,Anomali ThreatStream - AWS,CFG Managed Public Cloud,T3,COTS,xxx,9,1300,Digital Security,Threat Intelligence & Incident Response,Retail Banking,Thought Machine
+SYSID-08509,Apptio Targetprocess,Third Party Hosted,T3,COTS,xxx,12,1300,Business Operations,Project Management,Retail Banking,TCS BaNCS
+SYSID-08559,ApptioOne Plus,Third Party Hosted,,COTS,xxx,12,1300,Finance (Internal),Internal Financial Reporting,Retail Banking,Mambu
+SYSID-09283,Ardley Mortgage Portfolio Analytics,Third Party Hosted,T3,COTS,xxx,8,1300,Sales & Marketing/Commercial,Sales Operations,Retail Banking,Intellect Design Arena
+SYSID-00309,Ariba,Third Party Hosted,T3,COTS,xxx,7,1300,Business Operations,Operations Management,Retail Banking,Infosys Finacle
+SYSID-08400,Arkose Labs,Third Party Hosted,T1,Open Source,xxx,8,1300,Digital Security,Identity & Network Security,Retail Banking,Finastra Essence
+SYSID-05598,Articulate 360,Third Party Hosted,T3,COTS,xxx,14,1300,HR,"Performance, Training, Workforce & Change Management",Retail Banking,Oracle FLEXCUBE
+SYSID-06396,Arxan,Third Party Hosted,T3,COTS,xxx,12,1300,Digital Security,Data Security & Privacy,Retail Banking,Sumsub
+SYSID-00259,Ascensus IRA Service Center (IRASC),Third Party Hosted,T3,COTS,xxx,12,1300,Client Services & Support,"Financial Advisory, Analysis & Planning",Retail Banking,Socure
+SYSID-08925,Ash Brokerage Portal,Third Party Hosted,T3,COTS,xxx,8,1300,Client Services & Support,Insurance,Retail Banking,Entrust
+SYSID-08703,Asset Finance Self-Service Portal - AWS,CFG Managed Public Cloud,T3,Homegrown,xxx,8,1300,Business Operations,Facilities & Asset Management,Retail Banking,Jumio
+SYSID-05897,Associated Credit Services Payment Portal,Third Party Hosted,T3,COTS,xxx,7,1300,Finance (Internal),Accounts Management,Retail Banking,Incode Technologies
+SYSID-08001,Asurity Risk Exec Platform - Compliance,Third Party Hosted,T3,COTS,xxx,7,1300,Legal Management,Contract Management,Retail Banking,Delinea
+SYSID-06378,Atlassian Tool - Bitbucket - AWS,CFG Managed Public Cloud,T2,COTS,xxx,16,1300,IT,Software Development & Management,Retail Banking,BeyondTrust
+SYSID-06380,Atlassian Tool - Confluence - AWS,CFG Managed Public Cloud,T2,COTS,xxx,16,1300,IT,End User Computing,Retail Banking,CyberArk
+SYSID-06929,ATM Aptra Vision (SaaS),Third Party Hosted,T3,COTS,xxx,13,1300,Business Operations,Facilities & Asset Management,Retail Banking,ARCON
+SYSID-07909,ATM Compliance Survey,Third Party Hosted,T3,COTS,xxx,7,1300,Legal Management,Monitoring & Surveillance,Retail Banking,ManageEngine
+SYSID-08901,ATM CxMarketing - AWS,CFG Managed Public Cloud,,COTS,xxx,10,1300,Sales & Marketing/Commercial,Digital Marketing & Communication,Retail Banking,Microsoft
+SYSID-08975,ATOMM - Skyword AI Tool,Third Party Hosted,,COTS,xxx,12,1300,Sales & Marketing/Commercial,Digital Marketing & Communication,Retail Banking,Okta
+SYSID-01688,ATT Audio Conferencing,Third Party Hosted,,COTS,xxx,14,1300,Business Operations,Internal Communication & Employee Engagement,Retail Banking,Ping Identity

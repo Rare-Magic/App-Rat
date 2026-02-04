@@ -1,10 +1,19 @@
 .right-pane {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
   min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--text-secondary) rgba(0, 0, 0, 0.25);
+}
+
+.right-pane-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  min-height: min-content;
 }
 
 .right-section {
@@ -21,11 +30,11 @@
   color: var(--text-primary);
 }
 
-/* Status feed – no inner max-height; right pane scrolls as a whole */
+/* Status feed – part of right-pane-content, scrolls with the rest */
 .right-section-status {
   display: flex;
   flex-direction: column;
-  min-height: 0;
+  flex-shrink: 0;
 }
 
 .status-list-scroll {

@@ -40,3 +40,9 @@ coverage
 *.tgz
 .npm
 .eslintcache
+
+# Python / backend
+venv
+__pycache__
+*.py[cod]
+.pytest_cache

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import './LeftPane.css'
 
-function UploadZone({ file, onFile }) {
+function UploadZone({ file, onFile, uploading }) {
   const [drag, setDrag] = useState(false)
 
   const handleDrop = useCallback(
@@ -48,9 +48,10 @@ function UploadZone({ file, onFile }) {
           <div className="upload-file-info">
             <span className="upload-filename">{file.name}</span>
             <span className="upload-filesize">{(file.size / 1024).toFixed(1)} KB</span>
-            <button type="button" className="upload-clear" onClick={clearFile}>
+            <button type="button" className="upload-clear" onClick={clearFile} disabled={uploading}>
               Remove
             </button>
+            {uploading && <span className="upload-status">Uploading…</span>}
           </div>
         ) : (
           <>
@@ -128,13 +129,16 @@ export default function LeftPane({
   onRunTaxonomy,
   onRunGartner,
   onPptDownload,
+  uploading,
+  mappingCmdb,
+  mappingGartner,
 }) {
-  const canRunTaxonomy = file && industry
-  const canRunGartner = taxonomyDone
+  const canRunTaxonomy = file && industry && !uploading && !mappingCmdb
+  const canRunGartner = taxonomyDone && !mappingGartner
 
   return (
     <div className="left-pane">
-      <UploadZone file={file} onFile={onFile} />
+      <UploadZone file={file} onFile={onFile} uploading={uploading} />
       <IndustrySelect value={industry} options={industries} onChange={onIndustryChange} />
 
       <section className="left-section action-row">
