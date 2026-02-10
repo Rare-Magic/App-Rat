@@ -99,16 +99,33 @@ function ProgressBar({ progress, label }) {
   )
 }
 
-function OutputSection({ onDownload }) {
+function OutputSection({ onDownload, title, hint, iconSrc, downloadLabel, ariaLabel }) {
   return (
     <section className="left-section output-section">
-      <h3 className="left-section-title">Bot output</h3>
-      <button type="button" className="output-block" onClick={onDownload} aria-label="Download PPT">
+      <h3 className="left-section-title">{title}</h3>
+      <button type="button" className="output-block" onClick={onDownload} aria-label={ariaLabel}>
         <span className="output-icon" aria-hidden>
-          <img src="/logos/ppt.png" alt="" />
+          <img src={iconSrc} alt="" />
         </span>
         <div className="output-block-text">
-          <span className="output-text">Download PPT</span>
+          <span className="output-text">{downloadLabel}</span>
+          <span className="output-hint">{hint}</span>
+        </div>
+      </button>
+    </section>
+  )
+}
+
+function ExcelDownloadSection({ onDownload }) {
+  return (
+    <section className="left-section output-section">
+      <h3 className="left-section-title">Gartner Mapping Full Report</h3>
+      <button type="button" className="output-block output-block-excel" onClick={onDownload} aria-label="Download Excel">
+        <span className="output-icon" aria-hidden>
+          <img src="/logos/excel.png" alt="" />
+        </span>
+        <div className="output-block-text">
+          <span className="output-text">Download Excel</span>
           <span className="output-hint">Click to download</span>
         </div>
       </button>
@@ -129,6 +146,7 @@ export default function LeftPane({
   onRunTaxonomy,
   onRunGartner,
   onPptDownload,
+  onExcelDownload,
   uploading,
   mappingCmdb,
   mappingGartner,
@@ -147,6 +165,7 @@ export default function LeftPane({
           className="btn btn-primary btn-half"
           disabled={!canRunTaxonomy}
           onClick={onRunTaxonomy}
+          title={!canRunTaxonomy ? 'Upload a file and select an industry to enable' : 'Run CMDB mapping and generate PPT'}
         >
           Map CMDB Data
         </button>
@@ -165,7 +184,18 @@ export default function LeftPane({
         <ProgressBar progress={gartnerProgress} label={gartnerProgress === 100 ? 'Done' : `${gartnerProgress}%`} />
       </section>
 
-      {gartnerDone && <OutputSection onDownload={onPptDownload} />}
+      {taxonomyDone && (
+        <OutputSection
+          onDownload={onPptDownload}
+          title="Application Rationalization Heatmap"
+          hint="Click to download"
+          iconSrc="/logos/ppt.png"
+          downloadLabel="Download PPT"
+          ariaLabel="Download PPT"
+        />
+      )}
+
+      {gartnerDone && <ExcelDownloadSection onDownload={onExcelDownload} />}
     </div>
   )
 }

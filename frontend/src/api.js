@@ -1,5 +1,24 @@
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
+export function getDownloadPptUrl() {
+  return `${API_BASE}/api/download/ppt`
+}
+
+export function getDownloadExcelUrl() {
+  return `${API_BASE}/api/download/excel`
+}
+
+export async function downloadFile(url, filename) {
+  const res = await fetch(url)
+  if (!res.ok) throw new Error(res.statusText || 'Download failed')
+  const blob = await res.blob()
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = filename || 'download'
+  a.click()
+  URL.revokeObjectURL(a.href)
+}
+
 export async function uploadFile(file) {
   const form = new FormData()
   form.append('file', file)

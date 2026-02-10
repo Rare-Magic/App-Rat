@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import Header from './components/Header'
 import LeftPane from './components/LeftPane'
 import RightPane from './components/RightPane'
@@ -7,11 +7,11 @@ import './App.css'
 
 const INDUSTRIES = ['Banking & FS', 'Healthcare', 'Retail', 'Manufacturing']
 
-// Uneven progress over 60s: slow start, fast middle, slow end (ease-in-out)
-function progressAtSeconds(sec) {
+// Uneven progress over duration seconds: slow start, fast middle, slow end (ease-in-out)
+function progressAtSeconds(sec, duration) {
   if (sec <= 0) return 0
-  if (sec >= 60) return 100
-  const t = sec / 60
+  if (sec >= duration) return 100
+  const t = sec / duration
   return t < 0.5
     ? 2 * 50 * t * t
     : 100 - 2 * 50 * (1 - t) * (1 - t)
@@ -30,8 +30,11 @@ export default function App() {
   const [gartnerTable, setGartnerTable] = useState(null)
   const [pptDownloaded, setPptDownloaded] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [showUploadResult, setShowUploadResult] = useState(false)
   const [mappingCmdb, setMappingCmdb] = useState(false)
   const [mappingGartner, setMappingGartner] = useState(false)
+  const pendingCmdbRef = useRef(null)
+  const pendingGartnerRef = useRef(null)
 
   const addStatus = useCallback((message, type = 'info') => {
     setStatusLog((prev) => [...prev, { id: Date.now(), message, type }])
@@ -42,15 +45,18 @@ export default function App() {
       if (!f) {
         setFile(null)
         setUploadSummary(null)
+        setShowUploadResult(false)
         return
       }
       setUploading(true)
       setUploadSummary(null)
+      setShowUploadResult(false)
       try {
         const data = await apiUpload(f)
         setFile(f)
         setUploadSummary(data.summary || [])
         addStatus('File uploaded successfully', 'success')
+        setTimeout(() => setShowUploadResult(true), 5000)
       } catch (err) {
         addStatus(err.message || 'Upload failed', 'error')
       } finally {
@@ -75,23 +81,32 @@ export default function App() {
     setTaxonomyDone(false)
     setTaxonomyTable(null)
     setMappingCmdb(true)
+    pendingCmdbRef.current = null
     const start = Date.now()
+    mapCmdb()
+      .then((data) => {
+        pendingCmdbRef.current = { data }
+      })
+      .catch((err) => {
+        pendingCmdbRef.current = { error: err }
+      })
     const iv = setInterval(() => {
       const elapsed = (Date.now() - start) / 1000
-      const p = Math.min(100, Math.round(progressAtSeconds(elapsed)))
+      const p = Math.min(100, Math.round(progressAtSeconds(elapsed, 40)))
       setTaxonomyProgress(p)
       if (p >= 100) {
         clearInterval(iv)
         setMappingCmdb(false)
-        mapCmdb()
-          .then((data) => {
-            setTaxonomyDone(true)
-            setTaxonomyTable(data.summary || [])
-            addStatus('Taxonomy mapping completed (100%)', 'success')
-          })
-          .catch((err) => {
-            addStatus(err.message || 'Map CMDB failed', 'error')
-          })
+        const pending = pendingCmdbRef.current
+        pendingCmdbRef.current = null
+        if (pending?.data) {
+          setTaxonomyDone(true)
+          setTaxonomyTable(pending.data.summary || [])
+          addStatus('Taxonomy mapping completed (100%)', 'success')
+        } else if (pending?.error) {
+          setTaxonomyProgress(0)
+          addStatus(pending.error.message || 'Map CMDB failed', 'error')
+        }
       }
     }, 200)
   }, [file, industry, addStatus])
@@ -103,30 +118,55 @@ export default function App() {
     setGartnerDone(false)
     setGartnerTable(null)
     setMappingGartner(true)
+    pendingGartnerRef.current = null
     const start = Date.now()
+    mapGartner()
+      .then((data) => {
+        pendingGartnerRef.current = { data }
+      })
+      .catch((err) => {
+        pendingGartnerRef.current = { error: err }
+      })
     const iv = setInterval(() => {
       const elapsed = (Date.now() - start) / 1000
-      const p = Math.min(100, Math.round(progressAtSeconds(elapsed)))
+      const p = Math.min(100, Math.round(progressAtSeconds(elapsed, 25)))
       setGartnerProgress(p)
       if (p >= 100) {
         clearInterval(iv)
         setMappingGartner(false)
-        mapGartner()
-          .then((data) => {
-            setGartnerDone(true)
-            setGartnerTable(data.summary || [])
-            addStatus('Gartner mapping completed (100%)', 'success')
-          })
-          .catch((err) => {
-            addStatus(err.message || 'Gartner mapping failed', 'error')
-          })
+        const pending = pendingGartnerRef.current
+        pendingGartnerRef.current = null
+        if (pending?.data) {
+          setGartnerDone(true)
+          setGartnerTable(pending.data.summary || [])
+          addStatus('Gartner mapping completed (100%)', 'success')
+        } else if (pending?.error) {
+          setGartnerProgress(0)
+          addStatus(pending.error.message || 'Gartner mapping failed', 'error')
+        }
       }
     }, 200)
   }, [taxonomyDone, addStatus])
 
-  const handlePptDownload = useCallback(() => {
-    setPptDownloaded(true)
-    addStatus('Output downloaded', 'success')
+  const handlePptDownload = useCallback(async () => {
+    try {
+      const { downloadFile, getDownloadPptUrl } = await import('./api')
+      await downloadFile(getDownloadPptUrl(), 'output.pptx')
+      setPptDownloaded(true)
+      addStatus('Output downloaded', 'success')
+    } catch (err) {
+      addStatus(err.message || 'PPT download failed', 'error')
+    }
+  }, [addStatus])
+
+  const handleExcelDownload = useCallback(async () => {
+    try {
+      const { downloadFile, getDownloadExcelUrl } = await import('./api')
+      await downloadFile(getDownloadExcelUrl(), 'gartner_export.xlsx')
+      addStatus('Excel downloaded', 'success')
+    } catch (err) {
+      addStatus(err.message || 'Excel download failed', 'error')
+    }
   }, [addStatus])
 
   return (
@@ -146,6 +186,7 @@ export default function App() {
           onRunTaxonomy={runTaxonomyMapping}
           onRunGartner={runGartnerMapping}
           onPptDownload={handlePptDownload}
+          onExcelDownload={handleExcelDownload}
           uploading={uploading}
           mappingCmdb={mappingCmdb}
           mappingGartner={mappingGartner}
@@ -153,6 +194,8 @@ export default function App() {
         <RightPane
           statusLog={statusLog}
           uploadSummary={uploadSummary}
+          uploading={uploading}
+          showUploadResult={showUploadResult}
           taxonomyTable={taxonomyTable}
           gartnerTable={gartnerTable}
           pptDownloaded={pptDownloaded}

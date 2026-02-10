@@ -3,3 +3,5 @@ flask-cors>=4.0.0
 pandas>=2.0.0
 openpyxl>=3.1.0
 xlrd>=2.0.0
+python-pptx>=0.6.21
+lxml>=4.9.0
