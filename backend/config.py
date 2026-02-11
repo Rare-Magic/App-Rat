@@ -1,6 +1,16 @@
 import os
+import sys
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def _get_base_dir():
+    """Return base directory for both normal and PyInstaller-frozen runs."""
+    # When frozen by PyInstaller, data files are unpacked to sys._MEIPASS
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        return sys._MEIPASS
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+BASE_DIR = _get_base_dir()
 INPUT_DIR = os.path.join(BASE_DIR, 'input')
 PROCESS_DIR = os.path.join(BASE_DIR, 'process')
 OUTPUT_DIR = os.path.join(BASE_DIR, 'output')

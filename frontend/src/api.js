@@ -1,4 +1,5 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+// Prefer explicit VITE_API_URL in dev; fall back to same-origin for packaged exe
+const API_BASE = import.meta.env.VITE_API_URL || window.location.origin
 
 export function getDownloadPptUrl() {
   return `${API_BASE}/api/download/ppt`

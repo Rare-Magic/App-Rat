@@ -1,4 +1,5 @@
 import os
+import sys
 import warnings
 
 # Suppress openpyxl "no default style" warning when reading/writing Excel (harmless)
@@ -8,10 +9,10 @@ warnings.filterwarnings(
     module='openpyxl.styles.stylesheet'
 )
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
 
-from config import INPUT_DIR, PROCESS_DIR, OUTPUT_DIR, OUTPUT_PPTX, GARTNER_EXCEL, INPUT_CURRENT
+from config import INPUT_DIR, PROCESS_DIR, OUTPUT_DIR, OUTPUT_PPTX, GARTNER_EXCEL, INPUT_CURRENT, BASE_DIR
 from utils import (
     read_input_file,
     upload_summary,
@@ -19,12 +20,22 @@ from utils import (
     map_gartner,
 )
 
-app = Flask(__name__)
+FRONTEND_DIST = os.path.join(BASE_DIR, 'frontend', 'dist')
+
+app = Flask(__name__, static_folder=FRONTEND_DIST, static_url_path='')
 CORS(app)
 
 os.makedirs(INPUT_DIR, exist_ok=True)
 os.makedirs(PROCESS_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+
+@app.route('/')
+def index():
+    # Serve built React frontend (works both in dev and frozen exe)
+    if os.path.exists(os.path.join(app.static_folder, 'index.html')):
+        return send_from_directory(app.static_folder, 'index.html')
+    return jsonify({'error': 'Frontend build not found. Run npm run build in frontend.'}), 404
 
 
 def clean_output_files():
