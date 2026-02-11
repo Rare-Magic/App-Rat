@@ -200,6 +200,13 @@ def generate_presentation():
                                 break
                         p = new_tf.paragraphs[0] if len(new_tf.paragraphs) > 0 and new_tf.paragraphs[0].text == '' else new_tf.add_paragraph()
                         p.text = "Source: " + SOURCE_TEXT
+                        # Make source text small (Arial 8)
+                        try:
+                            for run in p.runs:
+                                run.font.size = Pt(8)
+                                run.font.name = ppt_config.FONT_NAME
+                        except Exception:
+                            pass
                         if template_source_para:
                             try:
                                 p.alignment = template_source_para.alignment
@@ -214,6 +221,32 @@ def generate_presentation():
                 except Exception:
                     pass
         add_slide_notes(slide, notes)
+
+        # Ensure all “Source:” text is small (Arial 8) even if it comes from the template
+        try:
+            from pptx.util import Pt as _Pt
+            for slide_obj in prs.slides:
+                # Shapes on slide
+                for shape in slide_obj.shapes:
+                    if not hasattr(shape, "text_frame"):
+                        continue
+                    tf = shape.text_frame
+                    for para in tf.paragraphs:
+                        if para.text and "source:" in para.text.lower():
+                            for run in para.runs:
+                                run.font.size = _Pt(8)
+                                run.font.name = ppt_config.FONT_NAME
+                # Notes
+                if hasattr(slide_obj, "notes_slide") and slide_obj.notes_slide:
+                    ns_tf = slide_obj.notes_slide.notes_text_frame
+                    for para in ns_tf.paragraphs:
+                        if para.text and "source:" in para.text.lower():
+                            for run in para.runs:
+                                run.font.size = _Pt(8)
+                                run.font.name = ppt_config.FONT_NAME
+        except Exception:
+            pass
+
         OUTPUT_PPT_PATH.parent.mkdir(parents=True, exist_ok=True)
         prs.save(str(OUTPUT_PPT_PATH))
         return True

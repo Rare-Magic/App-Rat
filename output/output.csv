@@ -1,26 +1,40 @@
 Category,Sub-Category,Count,Banner Value
-Banking Services,Corporate Banking,1,$1300
-Business Operations,Facilities & Asset Management,2,$2600
-Business Operations,Internal Communication & Employee Engagement,2,$2600
-Business Operations,Operations Management,2,$2600
-Business Operations,Project Management,1,$1300
-Client Services & Support,"Financial Advisory, Analysis & Planning",3,$3900
-Client Services & Support,Insurance,2,$1975
-Client Services & Support,Investment Services,2,$2500
-Digital Security,Data Security & Privacy,1,$1300
-Digital Security,Identity & Network Security,3,$3155
-Digital Security,Threat Intelligence & Incident Response,2,$2600
-Finance (Internal),Accounts Management,1,$1300
-Finance (Internal),Internal Financial Reporting,1,$1300
-Finance (Internal),Payment Processing,2,$1304
-HR,"Performance, Training, Workforce & Change Management",2,$2600
-IT,Business Intelligence,1,$2
-IT,Cloud Services & SaaS Management,1,$555
-IT,End User Computing,1,$1300
-IT,Software Development & Management,2,$2600
-Legal Management,Contract Management,1,$1300
-Legal Management,Legal Research or Case Management,1,$1300
-Legal Management,Monitoring & Surveillance,2,$2198
-Sales & Marketing/Commercial,Customer Engagement & Digital Experience,1,$1234
-Sales & Marketing/Commercial,Digital Marketing & Communication,2,$2600
-Sales & Marketing/Commercial,Sales Operations,1,$1300
+Asset Management,Alternative Investments,3,$902200
+Asset Management,Fund Administration,7,$2618000
+Banking Services,Corporate Banking,13,$3019550
+Banking Services,Digital Banking,7,$2388550
+Banking Services,Retail Banking,10,$2190450
+Business Operations,Facilities & Asset Management,9,$1746900
+Business Operations,Internal Communication,14,$3088150
+Business Operations,Operations Management,11,$2223600
+Business Operations,Project Management,7,$2785900
+Business Operations,Workplace Safety & Training,9,$1906050
+Client Services & Support,Consumer Finance,6,$1969500
+Client Services & Support,Financial Advisory & Planning,12,$2856850
+Client Services & Support,Insurance,6,$1115100
+Client Services & Support,Investment Services,15,$4380250
+Client Services & Support,Trading and Brokerage,4,$1171900
+Digital Security,Data Security & Privacy,20,$6467350
+Digital Security,Identity & Network Security,18,$6839600
+Digital Security,Threat Intelligence & Response,11,$3852950
+Finance,Accounts Management,22,$5933300
+Finance,Internal Financial Reporting,20,$6330100
+Finance,Payment Processing,21,$6181430
+Finance,Tax Filing & Compliance,10,$3176700
+HR,Benefits,8,$2103700
+HR,Performance & Training Mgmt,4,$649500
+HR,Recruiting,5,$839200
+IT,Business Intelligence,8,$2791500
+IT,Cloud Svc. & SaaS Mgmt.,14,$3822500
+IT,Data Management,9,$2739400
+IT,End User Computing,14,$3909250
+IT,IT Service Mgmt. & Support,13,$4014650
+IT,Infrastructure & Operations,16,$4854950
+IT,Software Development & Mgmt.,11,$3128400
+Legal Management,Contract Management,3,$1175600
+Legal Management,Legal Research or Case Mgmt.,4,$1022250
+Legal Management,Monitoring & Surveillance,3,$960200
+Sales & Marketing/Commercial,Customer Digital Experience,3,$874600
+Sales & Marketing/Commercial,Digital Marketing,9,$2966100
+Sales & Marketing/Commercial,Market & Economic Research,6,$2647800
+Sales & Marketing/Commercial,Sales Operations,15,$5188850

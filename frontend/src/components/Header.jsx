@@ -22,7 +22,7 @@ export default function Header() {
       <div className="header-left">
         <BotLogo />
       </div>
-      <h1 className="header-title">App Rationalization</h1>
+      <h1 className="header-title">Application Portfolio Rationalization</h1>
       <div className="header-right">
         <CompanyLogo />
       </div>

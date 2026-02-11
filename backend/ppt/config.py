@@ -31,9 +31,12 @@ BOXES_PER_ROW_FIRST = 4
 BOXES_PER_ROW_OTHER = 3
 
 COLOR_RANGES = {
-    "Green": (0, 7, "287819"),
-    "Yellow": (8, 14, "E18719"),
-    "Red": (15, 999, "A52323")
+    # 0–6 apps
+    "Green": (0, 6, "287819"),
+    # 7–12 apps
+    "Yellow": (7, 12, "E18719"),
+    # >12 apps
+    "Red": (13, 999, "A52323")
 }
 COLOR_MAP = {
     "Green": "287819",

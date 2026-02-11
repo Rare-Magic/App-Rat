@@ -436,19 +436,15 @@ def _add_banner_value(slide, box_x, box_y, box_width, banner_sum, format_info, c
     else:
         banner_value = format_number(banner_sum, format_info)
     
-    font_size = Pt(9)
-    char_width = font_size * 0.6
-    text_width = len(str(banner_value)) * char_width
-    
-    horizontal_padding = Inches(0.1)
-    vertical_padding = Inches(0.05)
-    banner_box_width = text_width + (2 * horizontal_padding)
-    banner_box_height = font_size + (2 * vertical_padding)
-    banner_box_right_margin = Inches(0.05)
-    
+    # Fixed banner box size (user-specified)
+    font_size = Pt(8)
+    banner_box_width = Inches(0.51)
+    banner_box_height = Inches(0.19)
+
     banner_box = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
-        box_x + box_width - banner_box_width - banner_box_right_margin,
+        # Align flush to the top-right of the category box
+        box_x + box_width - banner_box_width,
         box_y,
         banner_box_width,
         banner_box_height
@@ -461,6 +457,15 @@ def _add_banner_value(slide, box_x, box_y, box_width, banner_sum, format_info, c
     
     banner_text_frame = banner_box.text_frame
     banner_text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
+    # 0.05" inner margin for the text inside the banner box
+    try:
+        pad = Inches(0.05)
+        banner_text_frame.margin_left = pad
+        banner_text_frame.margin_right = pad
+        banner_text_frame.margin_top = pad
+        banner_text_frame.margin_bottom = pad
+    except Exception:
+        pass
     banner_p = banner_text_frame.paragraphs[0]
     banner_p.alignment = PP_ALIGN.CENTER
     banner_run = banner_p.add_run()
@@ -507,6 +512,7 @@ def _draw_pill(slide, row, index, cols, origin_x, origin_y, config, shortened_te
     tf.word_wrap = True
     tf.margin_left = 0
     tf.margin_right = 0
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     _set_text_style(p, text_hex)
 

@@ -66,10 +66,17 @@ export default function App() {
     [addStatus]
   )
 
+  const lastIndustryRef = useRef(null)
+
   const handleIndustryChange = useCallback(
     (val) => {
-      setIndustry(val)
-      if (val) addStatus(`Industry selected: ${val}`)
+      if (!val) return
+      // Only allow first non-empty selection and log it once
+      if (!lastIndustryRef.current) {
+        lastIndustryRef.current = val
+        setIndustry(val)
+        addStatus(`Industry selected: ${val}`)
+      }
     },
     [addStatus]
   )
@@ -199,6 +206,7 @@ export default function App() {
           taxonomyTable={taxonomyTable}
           gartnerTable={gartnerTable}
           pptDownloaded={pptDownloaded}
+          industry={industry}
         />
       </main>
     </>

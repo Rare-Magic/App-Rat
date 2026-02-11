@@ -100,18 +100,27 @@ def api_map_cmdb():
 
 
 def write_gartner_excel(summary):
-    """Write Gartner summary to output/gartner_export.xlsx (Category, Sub-Category, Top5 App Names, Recommended Gartner Apps, Market Leaders)."""
+    """Write Gartner summary to output/gartner_export.xlsx (Category, Sub-Category, Current Portfolio Apps, Recommended Gartner Apps, Market Leaders)."""
     import pandas as pd
     rows = []
     for r in (summary or []):
         rows.append({
             'Category': r.get('l1', ''),
             'Sub-Category': r.get('l2', ''),
-            'Top5 App Names': ', '.join(r['top5AppNames']) if isinstance(r.get('top5AppNames'), list) else str(r.get('top5AppNames', '')),
+            'Current Portfolio Apps (Top 5 by spend)': ', '.join(r['top5AppNames']) if isinstance(r.get('top5AppNames'), list) else str(r.get('top5AppNames', '')),
             'Recommended Gartner Apps': r.get('recommendedGartnerApps', ''),
             'Market Leaders': r.get('marketLeaders', ''),
         })
-    df = pd.DataFrame(rows, columns=['Category', 'Sub-Category', 'Top5 App Names', 'Recommended Gartner Apps', 'Market Leaders'])
+    df = pd.DataFrame(
+        rows,
+        columns=[
+            'Category',
+            'Sub-Category',
+            'Current Portfolio Apps (Top 5 by spend)',
+            'Recommended Gartner Apps',
+            'Market Leaders',
+        ],
+    )
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     with pd.ExcelWriter(GARTNER_EXCEL, engine='openpyxl') as writer:
         df.to_excel(writer, index=False, sheet_name='Sheet1')

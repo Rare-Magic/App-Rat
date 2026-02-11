@@ -36,7 +36,7 @@ function UploadZone({ file, onFile, uploading }) {
 
   return (
     <section className="left-section">
-      <h3 className="left-section-title">Upload CMDB Data</h3>
+      <h3 className="left-section-title">Upload Application Portfolio Raw Data</h3>
       <p className="left-section-hint">Excel or CSV (fixed column names). Drag & drop or choose file.</p>
       <div
         className={`upload-zone ${drag ? 'upload-zone-drag' : ''} ${file ? 'upload-zone-has-file' : ''}`}
@@ -67,7 +67,7 @@ function UploadZone({ file, onFile, uploading }) {
   )
 }
 
-function IndustrySelect({ value, options, onChange }) {
+function IndustrySelect({ value, options, onChange, disabled }) {
   return (
     <section className="left-section">
       <h3 className="left-section-title">Select Bain Industry</h3>
@@ -75,6 +75,7 @@ function IndustrySelect({ value, options, onChange }) {
         className="industry-select"
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        disabled={disabled}
         aria-label="Select industry"
       >
         <option value="">Select industry</option>
@@ -119,16 +120,19 @@ function OutputSection({ onDownload, title, hint, iconSrc, downloadLabel, ariaLa
 function ExcelDownloadSection({ onDownload }) {
   return (
     <section className="left-section output-section">
-      <h3 className="left-section-title">Gartner Mapping Full Report</h3>
+      <h3 className="left-section-title">Gartner Leaders Full Report</h3>
       <button type="button" className="output-block output-block-excel" onClick={onDownload} aria-label="Download Excel">
         <span className="output-icon" aria-hidden>
           <img src="/logos/excel.png" alt="" />
         </span>
         <div className="output-block-text">
-          <span className="output-text">Download Excel</span>
+          <span className="output-text">Download File</span>
           <span className="output-hint">Click to download</span>
         </div>
       </button>
+      <p className="left-section-note">
+        <em>Note: Gartner Leaders Mapping coverage may vary across taxonomy categories and sub-categories.</em>
+      </p>
     </section>
   )
 }
@@ -157,7 +161,7 @@ export default function LeftPane({
   return (
     <div className="left-pane">
       <UploadZone file={file} onFile={onFile} uploading={uploading} />
-      <IndustrySelect value={industry} options={industries} onChange={onIndustryChange} />
+      <IndustrySelect value={industry} options={industries} onChange={onIndustryChange} disabled={!!industry} />
 
       <section className="left-section action-row">
         <button
@@ -165,9 +169,13 @@ export default function LeftPane({
           className="btn btn-primary btn-half"
           disabled={!canRunTaxonomy}
           onClick={onRunTaxonomy}
-          title={!canRunTaxonomy ? 'Upload a file and select an industry to enable' : 'Run CMDB mapping and generate PPT'}
+          title={
+            !canRunTaxonomy
+              ? 'Upload a file and select an industry to enable'
+              : 'Map applications to the selected industry taxonomy and generate PPT'
+          }
         >
-          Map CMDB Data
+          Map Apps to Industry Taxonomy
         </button>
         <ProgressBar progress={taxonomyProgress} label={taxonomyProgress === 100 ? 'Done' : `${taxonomyProgress}%`} />
       </section>
@@ -190,8 +198,8 @@ export default function LeftPane({
           title="Application Rationalization Heatmap"
           hint="Click to download"
           iconSrc="/logos/ppt.png"
-          downloadLabel="Download PPT"
-          ariaLabel="Download PPT"
+          downloadLabel="Download Output"
+          ariaLabel="Download Output"
         />
       )}
 
